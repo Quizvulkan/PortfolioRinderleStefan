@@ -10,15 +10,19 @@ import org.springframework.stereotype.Service;
 public class StartupBean {
 
     @PostConstruct
-    public void init(){
+    public void init() {
         DefaultApi defaultApi = new DefaultApi();
 
         GameInputDto gameInput = new GameInputDto();
-        gameInput.setGroupName("IrgendeinName"); //Group name
+        gameInput.setGroupName("GroupName");
 
-        GameDto response = defaultApi.gamePost(gameInput);
-
-        System.out.println(response);
-
+        try {
+            GameDto response = defaultApi.gamePost(gameInput);
+            System.out.println(response);
+        } catch (Exception e) {
+            System.err.println("Fehler beim API-Aufruf: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
+
 }
